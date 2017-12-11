@@ -22,6 +22,7 @@ function SelectedLanguage(props) {
 		</ul>
 	)
 }
+
 function RepoGrid(props) {
 	return (
 		<ul className="popular-list">
@@ -57,8 +58,8 @@ class Popular extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selectedLanguage: 'All',
-			repos: null
+			repos: null,
+			selectedLanguage: 'All'
 		}
 		this.updateLanguage = this.updateLanguage.bind(this);
 	}
@@ -70,14 +71,13 @@ class Popular extends React.Component {
 	updateLanguage(lang) {
 		this.setState(() => {
 			return {
-				selectedLanguage: lang,
-				repos: null
+				repos: null,
+				selectedLanguage: lang
 			}
 		})
 
 		api.fetchPopularRepos(lang)
 			.then((repos) => {
-				console.log(repos);
 				this.setState(() => {
 					return {
 						repos: repos
@@ -95,7 +95,11 @@ class Popular extends React.Component {
 				/>
 				{
 					!this.state.repos
-						? <p>Loading</p>
+						? <div className="loading">
+								<svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+   								<circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+								</svg>
+							</div>
 						: <RepoGrid repos={this.state.repos} />
 				}
 			</div>
