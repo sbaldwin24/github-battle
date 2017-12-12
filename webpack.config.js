@@ -15,10 +15,11 @@ module.exports = {
           /node_modules/,
         ],
         include: path.resolve(__dirname, 'app'),
-        test: /\.css$/,
+        test: /\.scss$/,
         use: [
 					'style-loader',
-					'css-loader'
+          'css-loader',
+          'sass-loader'
 				],
       },
       {

@@ -27,13 +27,13 @@ li {
 
 .languages {
 	display: flex;
-	justify-content: center;
-}
+  justify-content: center;
 
-.languages li {
-	cursor: pointer;
-	font-weight: bold;
-	margin: 10px;
+  li {
+    cursor: pointer;
+    font-weight: bold;
+    margin: 10px;
+  }
 }
 
 .popular-list {
@@ -66,15 +66,6 @@ li {
 	animation: rotator 1.4s linear infinite;
 }
 
-@-webkit-keyframes rotator {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(270deg);
-  }
-}
-
 @keyframes rotator {
   0% {
   	transform: rotate(0deg);
@@ -89,24 +80,6 @@ li {
   stroke-dasharray: 187;
   stroke-dashoffset: 0;
   transform-origin: center;
-}
-
-@-webkit-keyframes colors {
-  0% {
-		stroke: #E41062;
-  }
-  25% {
-		stroke: #0D223C;
-  }
-  50% {
-    stroke: #E7FD46;
-  }
-  75% {
-    stroke:#5AB9CF;
-  }
-  100% {
-    stroke: #FD9035;
-  }
 }
 
 @keyframes colors {
@@ -127,20 +100,6 @@ li {
   }
 }
 
-@-webkit-keyframes dash {
-  0% {
-    stroke-dashoffset: 187;
-  }
-  50% {
-    stroke-dashoffset: 46.75;
-    transform: rotate(135deg);
-  }
-  100% {
-    stroke-dashoffset: 187;
-    transform: rotate(450deg);
-  }
-}
-
 @keyframes dash {
   0% {
     stroke-dashoffset: 187;
@@ -157,10 +116,9 @@ li {
 
 .nav {
   display: flex;
-}
-
-.nav li {
-  margin-right: 15px;
+  li {
+    margin-right: 15px;
+  }
 }
 
 .active {
@@ -178,21 +136,19 @@ li {
   color: #e6e6e6;
   background: #0a0a0a;
   border: none;
-  font-size: 16px;
   border-radius: 3px;
-  width: 200px;
-  text-align: center;
   display: block;
-  padding: 7px 0;
+  font-size: 16px;
   margin: 10px auto;
-}
-
-.button:hover:enabled {
-  background: linear-gradient(#1a1a1a,#0a0a0a);
-  color: #fff;
-  text-decoration: none;
-}
-
-.button:active {
-  transform: translateY(1px);
+  padding: 7px 0;
+  text-align: center;
+  width: 200px;
+  &:active {
+    transform: translateY(1px);
+  }
+  &:hover:enabled {
+    background-color: linear-gradient(#1a1a1a,#0a0a0a);
+    color: #fff;
+    text-decoration: none;
+  }
 }
