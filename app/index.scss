@@ -1,10 +1,10 @@
 body {
-	font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
 }
 
 a {
-  text-decoration: none;
   color: #d0021b;
+  text-decoration: none;
 }
 
 ul {
@@ -84,19 +84,19 @@ li {
 
 @keyframes colors {
   0% {
-		stroke: #E41062;
+		stroke: #e41062;
   }
   25% {
-		stroke: #0D223C;
+		stroke: #0d223c;
   }
   50% {
-    stroke: #E7FD46;
+    stroke: #e7fd46;
   }
   75% {
-    stroke: #5AB9CF;
+    stroke: #5aB9cf;
   }
   100% {
-    stroke: #FD9035;
+    stroke: #fd9035;
   }
 }
 
@@ -116,9 +116,11 @@ li {
 
 .nav {
   display: flex;
+
   li {
     margin-right: 15px;
   }
+
 }
 
 .active {
@@ -133,21 +135,23 @@ li {
 }
 
 .button {
-  color: #e6e6e6;
   background: #0a0a0a;
   border: none;
   border-radius: 3px;
+  color: #e6e6e6;
   display: block;
   font-size: 16px;
   margin: 10px auto;
   padding: 7px 0;
   text-align: center;
   width: 200px;
+
   &:active {
     transform: translateY(1px);
   }
-  &:hover:enabled {
-    background-color: linear-gradient(#1a1a1a,#0a0a0a);
+
+  &:hover {
+    background: linear-gradient(#1a1a1a,#0a0a0a);
     color: #fff;
     text-decoration: none;
   }
