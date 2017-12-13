@@ -2,11 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-/**
- * @todo Look into using public class fields, instead of the constructor function
- * @see https://github.com/tc39/proposal-class-fields
- */
-
 function PlayerPreview(props) {
 	return (
 		<div>
@@ -37,19 +32,16 @@ PlayerPreview.propTypes = {
 	username: PropTypes.string.isRequired,
 }
 
+/**
+ * No contructor function, insead using Public Class Fields
+ * @see https://github.com/tc39/proposal-class-fields
+ */
 class PlayerInput extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			username: ''
-		}
-
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+	state = {
+		username: ''
 	}
 
-	handleChange(e) {
+	handleChange = (e) => {
 		const value = e.target.value;
 
 		this.setState(() => {
@@ -59,7 +51,7 @@ class PlayerInput extends React.Component {
 		})
 	}
 
-	handleSubmit(e) {
+	handleSubmit = (e) => {
 		e.preventDefault();
 
 		this.props.onSubmit(
@@ -100,22 +92,21 @@ PlayerInput.propTypes = {
 	onSubmit: PropTypes.func.isRequired
 }
 
+/**
+ * No contructor function, insead using Public Class Fields
+ * @see https://github.com/tc39/proposal-class-fields
+ */
+
 class Battle extends React.Component {
-	constructor(props) {
-		super(props);
 
-		this.state = {
-			playerOneName: '',
-			playerTwoName: '',
-			playerOneImage: null,
-			playerTwoImage: null
-		}
-
-		this.handleReset = this.handleReset.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+	state = {
+		playerOneName: '',
+		playerTwoName: '',
+		playerOneImage: null,
+		playerTwoImage: null
 	}
 
-	handleSubmit(id, username) {
+	handleSubmit = (id, username) => {
 		this.setState(() => {
 			const newState = {};
 
@@ -125,7 +116,8 @@ class Battle extends React.Component {
 		})
 	}
 
-	handleReset(id) {
+	handleReset = (id) => {
+
 		this.setState(() => {
 			const newState = {};
 
