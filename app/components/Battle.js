@@ -1,5 +1,41 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+/**
+ * @todo Look into using public class fields, instead of the constructor function
+ * @see https://github.com/tc39/proposal-class-fields
+ */
+
+function PlayerPreview(props) {
+	return (
+		<div>
+			<div className="column">
+				<img
+					alt={`Avatar for ${props.username}`}
+					className="Avatar"
+					src={props.avatar}
+				/>
+				<h2 className="username">
+					@{props.username}
+				</h2>
+				<button
+					className="reset"
+					onClick={props.onReset.bind(null, props.id)}
+				>
+					Reset
+				</button>
+			</div>
+		</div>
+	)
+}
+
+PlayerPreview.propTypes = {
+	avatar: PropTypes.string.isRequired,
+	id: PropTypes.string.isRequired,
+	onReset: PropTypes.func.isRequired,
+	username: PropTypes.string.isRequired,
+}
 
 class PlayerInput extends React.Component {
 	constructor(props) {
@@ -12,6 +48,7 @@ class PlayerInput extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
+
 	handleChange(e) {
 		const value = e.target.value;
 
@@ -30,6 +67,7 @@ class PlayerInput extends React.Component {
 			this.state.username
 		)
 	}
+
 	render() {
 		return (
 			<form className="column" onSubmit={this.handleSubmit}>
@@ -73,23 +111,33 @@ class Battle extends React.Component {
 			playerTwoImage: null
 		}
 
+		this.handleReset = this.handleReset.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	handleSubmit(id, username) {
-		this.setState(function() {
+		this.setState(() => {
 			const newState = {};
 
 			newState[`${id}Name`] = username;
-			// newState[id + 'Image'] = 'https://github.com/' + username;
 			newState[`${id}Image`] = `https://github.com/${username}.png?size=200`;
 			return newState;
 		})
 	}
 
-	render() {
-		const { playerOneName, playerTwoName } = this.state;
+	handleReset(id) {
+		this.setState(() => {
+			const newState = {};
 
+			newState[`${id}Name`] = '';
+			newState[`${id}Image`] = null;
+			return newState;
+		})
+	}
+
+	render() {
+		const { playerOneName, playerTwoName, playerOneImage, playerTwoImage } = this.state;
+		const { match } = this.props;
 		return (
 			<div>
 				<div className="row">
@@ -103,6 +151,16 @@ class Battle extends React.Component {
 					}
 
 					{
+						playerOneImage !== null &&
+						<PlayerPreview
+							avatar={playerOneImage}
+							id="playerOne"
+							onReset={this.handleReset}
+							username={playerOneName}
+						/>
+					}
+
+					{
 						!playerTwoName &&
 						<PlayerInput
 							id="playerTwo"
@@ -110,7 +168,29 @@ class Battle extends React.Component {
 							onSubmit={this.handleSubmit}
 						/>
 					}
+
+					{
+						playerTwoImage !== null &&
+						<PlayerPreview
+							avatar={playerTwoImage}
+							id="playerTwo"
+							onReset={this.handleReset}
+							username={playerTwoName}
+						/>
+					}
 				</div>
+				{
+					playerOneImage && playerTwoImage &&
+					<Link
+						className="button"
+						to={{
+							pathname: `${match.url}/results`,
+							search: `?playerOneName=${playerOneName}&playerTwoName=${playerTwoName}`
+						}}
+					>
+						Battle
+					</Link>
+				}
 			</div>
 		)
 	}
