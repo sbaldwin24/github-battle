@@ -1,9 +1,11 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-	entry: ['./app/index.js', './app/index.scss'],
+	entry: [
+    './app/index.js',
+    './app/index.scss'
+  ],
 	output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -17,18 +19,11 @@ module.exports = {
         ],
         include: path.resolve(__dirname, 'app'),
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                minimize: true,
-                sourceMap: true,
-              },
-            },
-          ],
-        }),
+        use: [
+					'style-loader',
+          'css-loader',
+          'sass-loader'
+				],
       },
       {
         exclude: [
@@ -47,12 +42,7 @@ module.exports = {
   devServer: {
     historyApiFallback: true
   },
-	plugins: [
-    new HtmlWebpackPlugin({
-		  template: 'app/index.html'
-    }),
-    new ExtractTextPlugin({
-      filename: 'css/style.css',
-    })
-  ]
+	plugins: [new HtmlWebpackPlugin({
+		template: 'app/index.html'
+	})]
 }
