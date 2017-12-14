@@ -32,14 +32,16 @@ function RepoGrid(props) {
 						<li className="popular-item" key={repo.name}>
 							<div className="popular-rank">#{index + 1}</div>
 							<ul className="space-list-items">
-								<li>
-									<img
-										alt={`Avatar for ${repo.owner.login}`}
-										className="avatar"
-										src={repo.owner.avatar_url}
-									/>
-								</li>
-								<li><a href={repo.html_url}>{repo.name}</a></li>
+								<a href={repo.html_url}>
+									<li>
+										<img
+											alt={`Avatar for ${repo.owner.login}`}
+											className="avatar"
+											src={repo.owner.avatar_url}
+										/>
+									</li>
+									<li>{repo.name}</li>
+								</a>
 							</ul>
 						</li>
 					)
@@ -55,20 +57,17 @@ SelectedLanguage.propTypes = {
 }
 
 class Popular extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			repos: null,
-			selectedLanguage: 'All'
-		}
-		this.updateLanguage = this.updateLanguage.bind(this);
+
+	state = {
+		repos: null,
+		selectedLanguage: 'All'
 	}
 
 	componentDidMount() {
 		this.updateLanguage(this.state.selectedLanguage);
 	}
 
-	updateLanguage(lang) {
+	updateLanguage = (lang) => {
 		this.setState(() => {
 			return {
 				repos: null,

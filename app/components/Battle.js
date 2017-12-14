@@ -1,36 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PlayerPreview from './PlayerPreview';
 import PropTypes from 'prop-types';
-
-function PlayerPreview(props) {
-	return (
-		<div>
-			<div className="column">
-				<img
-					alt={`Avatar for ${props.username}`}
-					className="Avatar"
-					src={props.avatar}
-				/>
-				<h2 className="username">
-					@{props.username}
-				</h2>
-				<button
-					className="reset"
-					onClick={props.onReset.bind(null, props.id)}
-				>
-					Reset
-				</button>
-			</div>
-		</div>
-	)
-}
-
-PlayerPreview.propTypes = {
-	avatar: PropTypes.string.isRequired,
-	id: PropTypes.string.isRequired,
-	onReset: PropTypes.func.isRequired,
-	username: PropTypes.string.isRequired,
-}
+import Results from './Results';
+import api from '../utils/api';
 
 /**
  * No contructor function, insead using Public Class Fields
@@ -114,7 +87,9 @@ class Battle extends React.Component {
 			newState[`${id}Image`] = `https://github.com/${username}.png?size=200`;
 			return newState;
 		})
+
 	}
+
 
 	handleReset = (id) => {
 
@@ -146,10 +121,15 @@ class Battle extends React.Component {
 						playerOneImage !== null &&
 						<PlayerPreview
 							avatar={playerOneImage}
-							id="playerOne"
-							onReset={this.handleReset}
 							username={playerOneName}
-						/>
+						>
+							<button
+								className="reset"
+								onClick={this.handleReset.bind(null, 'playerOne')}
+							>
+								Reset
+							</button>
+						</PlayerPreview>
 					}
 
 					{
@@ -165,10 +145,15 @@ class Battle extends React.Component {
 						playerTwoImage !== null &&
 						<PlayerPreview
 							avatar={playerTwoImage}
-							id="playerTwo"
-							onReset={this.handleReset}
 							username={playerTwoName}
-						/>
+						>
+							<button
+								className="reset"
+								onClick={this.handleReset.bind(null, 'playerTwo')}
+							>
+								Reset
+							</button>
+						</PlayerPreview>
 					}
 				</div>
 				{
